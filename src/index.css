@@ -227,3 +227,25 @@ img{
   cursor: pointer;
 }
   
+
+/* Formulario */
+.buscarPelicula{
+  width: min(90%, 130rem);
+  margin: 5rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 2rem;
+}
+
+form label{
+  font-size: 2rem;
+  padding: 0 2rem;
+}
+
+select{
+  font-size: 2rem;
+  padding: 1rem;
+  font-size: 2rem;
+  background-color: #dad8d9;
+  cursor: pointer;
+}

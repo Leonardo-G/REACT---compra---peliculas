@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BotonCarrito } from './components/BotonCarrito';
+import { FormularioBusqueda } from './components/FormularioBusqueda';
 import { ListaCarrito } from './components/ListaCarrito';
 import { Pelicula } from './components/Pelicula';
 import peliculas from "./data/peliculas"
@@ -30,6 +31,7 @@ export const App = () => {
 
     return (
         <>
+            <FormularioBusqueda />
             <div className="catalogo">
                 <div className="pelicula">
                     {peliculas.map(pelicula => (

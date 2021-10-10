@@ -1,6 +1,7 @@
 import React from 'react'
 
 export const ListaPelicula = ({id, img, nombre, precio, eliminarCarrito}) => {
+    
     return (
         <li className="listaCarrito__pelicula">
             <img className="imgCarrito" src={ img } alt={ nombre }/>

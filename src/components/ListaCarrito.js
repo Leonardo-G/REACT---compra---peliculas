@@ -1,7 +1,7 @@
 import React from 'react'
 import { ListaPelicula } from './ListaPelicula'
 
-export const ListaCarrito = ({carrito, setOpen}) => {
+export const ListaCarrito = ({carrito, setOpen, eliminarCarrito}) => {
     return (
         <>
             <div className="fondoCarrito"></div>
@@ -13,7 +13,7 @@ export const ListaCarrito = ({carrito, setOpen}) => {
                 ></ion-icon>
                 <ul>
                     {carrito.map( pelicula => (
-                        <ListaPelicula key={ pelicula.id } {...pelicula} />
+                        <ListaPelicula key={ pelicula.id } {...pelicula} eliminarCarrito={ eliminarCarrito }/>
                     ))}
                 </ul>
             </div>

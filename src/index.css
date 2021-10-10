@@ -159,4 +159,71 @@ img{
   transform: translate(-50%, -50%);
   color: #fff;
 }
+
+/* Lista Carrito */
+.fondoCarrito{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(164, 154, 135, 0.534);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+  z-index: 9;
+}
+
+.listaCarrito{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #181515;
+  height: 100%;
+  width: 60rem;
+  position: fixed;
+  z-index: 99;
+}
+
+.cerrarLista{
+  background-color: #fff;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  color: #000;
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  cursor: pointer;
+}
+.listaCarrito__pelicula{
+  display: grid;
+  grid-template-columns: 1fr 2fr 0.5fr 0.1fr;
+  height: 18rem;
+  align-items: center;
+  text-align: center;
+  column-gap: 2rem;
+  padding: 2rem;
+  border-bottom: 1px solid #a7a7a780;
+  width: 90%;
+  margin: 4rem auto 0 auto;
+}
+
+.listaCarrito__pelicula h3{
+  font-size: 2rem;
+  color: #a49a87;
+  font-weight: 700;
+}
+
+.precioCarrito{
+  font-size: 2rem;
+  color: #a49a87;
+}
+
+.eliminarPelicula{
+  width: 3rem;
+  height: 3rem;
+  background-color:#fff;
+  cursor: pointer;
+}
   

@@ -10,16 +10,26 @@ export const App = () => {
     const arrayCarrito = JSON.parse(localStorage.getItem("arrayPeliculas")) || [];
 
 
-    const [peliculasCatalogo, setPeliculasCatalogo] = useState(peliculas);
+    const [peliculasCatalogo, setPeliculasCatalogo] = useState([]);
     const [carrito, setCarrito] = useState(arrayCarrito);
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
+    
+    useEffect(() => {
+        const consultarApi = () => {
+            fetch("https://peliculas-9b08e-default-rtdb.firebaseio.com/.json")
+            .then(resp => resp.json())
+            .then(resultado => setPeliculasCatalogo(resultado));
+        } 
+        consultarApi()
+        
+    }, [])
 
     useEffect( () => {
         localStorage.setItem("arrayPeliculas", JSON.stringify(carrito))
     }, [carrito])
 
     const agregarCarrito = (id) => {
-        const pelicualAgregada = peliculas.filter( pelicula => pelicula.id === id)[0];
+        const pelicualAgregada = peliculasCatalogo.filter( pelicula => pelicula.id === id)[0];
         setCarrito([...carrito, pelicualAgregada])
     }
 
@@ -45,10 +55,10 @@ export const App = () => {
 
     return (
         <>
-            <FormularioBusqueda handleChangeBusqueda={handleChangeBusqueda} objBusqueda={objBusqueda} setPeliculasCatalogo={setPeliculasCatalogo}/>
+            <FormularioBusqueda peliculasCatalogo={peliculasCatalogo} handleChangeBusqueda={handleChangeBusqueda} objBusqueda={objBusqueda} setPeliculasCatalogo={setPeliculasCatalogo}/>
             <div className="catalogo">
                 <div className="pelicula">
-                    {peliculasCatalogo.map(pelicula => (
+                    { peliculasCatalogo.map(pelicula => (
                         <Pelicula key={pelicula.id} pelicula={pelicula} agregarCarrito={agregarCarrito}/>
                     ))}
                     { (carrito.length > 0) && <BotonCarrito carrito={carrito} setOpen={setOpen} />}

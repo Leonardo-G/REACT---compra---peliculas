@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import peliculas from "../../data/peliculas.json";
-import { getYears, valuesArray } from '../../helpers/helpers';
+import { getYears, searchGenero, valuesArray } from '../../helpers/helpers';
+import { Pelicula } from '../Pelicula';
 
 export const FormularioBusqueda = ({handleChangeBusqueda, objBusqueda, setPeliculasCatalogo}) => {
 
@@ -8,15 +9,30 @@ export const FormularioBusqueda = ({handleChangeBusqueda, objBusqueda, setPelicu
     const years = getYears()
     const generosPeliculas = valuesArray(peliculas);
 
+    const busquedaYear = (pelicula) => {
+        if(objBusqueda.year){
+            return pelicula.year >= objBusqueda.year
+        }
+        return pelicula
+    }
+
+    const busquedaGenero = (pelicula) => {
+        if(objBusqueda.genero){
+            return pelicula.genero === objBusqueda.genero
+        }
+        return pelicula
+    }
+
     const handleSearch = (e) => {
         e.preventDefault();
-        
-        //Buscamos el genero y el "year",.
-        const busqueda = peliculas.filter(pelicula => pelicula.genero === objBusqueda.genero);
-        const yearBusqueda = busqueda.filter(pelicula => pelicula.year >= objBusqueda.year) || busqueda;
 
-
-        setPeliculasCatalogo(yearBusqueda)
+        //Buscamos el genero y el "year",
+        fetch("https://peliculas-9b08e-default-rtdb.firebaseio.com/.json")
+        .then(resp => resp.json())
+        .then(resultado => {
+            const busqueda = resultado.filter( busquedaYear ).filter( busquedaGenero )
+            setPeliculasCatalogo(busqueda)
+        });  
     }
     
     return (
@@ -28,6 +44,7 @@ export const FormularioBusqueda = ({handleChangeBusqueda, objBusqueda, setPelicu
                 <label htmlFor="genero">Buscar Pelicula</label>
                 <select 
                     name="genero"
+                    value={objBusqueda.genero}
                     onChange={handleChangeBusqueda}    
                 >
                     <option value="">Seleccionar Género</option>
@@ -38,8 +55,8 @@ export const FormularioBusqueda = ({handleChangeBusqueda, objBusqueda, setPelicu
             </div>
             <div>
                 <label htmlFor="year">Desde</label>
-                <select name="year" onChange={handleChangeBusqueda}>
-                    <option value="">Seleccione un año</option>
+                <select name="year" value={objBusqueda.year} onChange={handleChangeBusqueda} >
+                    <option value="" selected disabled>Seleccione un año</option>
                     {years.map(year => (
                         <option key={year} value={year}> {year} </option>
                     ))}

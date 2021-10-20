@@ -26,3 +26,19 @@ export const valuesArray = (array) => {
     
     return [...new Set(generos)]
 }
+
+export const searchGenero = (pelicula, objBusqueda) => {
+    if(pelicula.genero){
+        return pelicula.genero === objBusqueda.genero
+    }
+
+    return pelicula
+}
+
+export const searchYear = (pelicula, objBusqueda) => {
+    if(pelicula.year === ""){
+        return pelicula.year >= objBusqueda.year
+    }
+
+    return pelicula
+}

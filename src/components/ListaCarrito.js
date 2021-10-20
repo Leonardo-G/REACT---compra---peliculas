@@ -12,9 +12,9 @@ export const ListaCarrito = ({carrito, setOpen, eliminarCarrito}) => {
                     onClick={() => setOpen(open => !open)}
                 ></ion-icon>
                 <ul>
-                    {carrito.map( pelicula => {
+                    {carrito.map( pelicula => (
                         <ListaPelicula key={ pelicula.id } {...pelicula} eliminarCarrito={ eliminarCarrito }/>
-                    })}
+                    ))}
                 </ul>
             </div>
         </>

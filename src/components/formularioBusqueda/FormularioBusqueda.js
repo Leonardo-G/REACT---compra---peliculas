@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import peliculas from "../../data/peliculas.json";
-import { getYears, searchGenero, valuesArray } from '../../helpers/helpers';
-import { Pelicula } from '../Pelicula';
+import { getYears, valuesArray } from '../../helpers/helpers';
+import datos from "../../data/peliculas.json"
 
-export const FormularioBusqueda = ({handleChangeBusqueda, objBusqueda, setPeliculasCatalogo}) => {
+export const FormularioBusqueda = ({handleChangeBusqueda, objBusqueda, setPeliculasCatalogo, setLoad}) => {
 
     //Valores devueltos del helper
     const years = getYears()
@@ -25,14 +25,16 @@ export const FormularioBusqueda = ({handleChangeBusqueda, objBusqueda, setPelicu
 
     const handleSearch = (e) => {
         e.preventDefault();
+        setLoad(true)
 
-        //Buscamos el genero y el "year",
-        fetch("https://peliculas-9b08e-default-rtdb.firebaseio.com/.json")
-        .then(resp => resp.json())
-        .then(resultado => {
-            const busqueda = resultado.filter( busquedaYear ).filter( busquedaGenero )
+        //Simulamos carga
+        setTimeout(() => {
+            const busqueda = datos.filter( busquedaYear ).filter( busquedaGenero )
             setPeliculasCatalogo(busqueda)
-        });  
+            setLoad(false)
+        }, 1000);
+        
+        
     }
     
     return (
